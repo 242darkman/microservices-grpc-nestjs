@@ -1,0 +1,25 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: my-jaeger
+  labels:
+    app: jaeger
+spec:
+  agent:
+    strategy: DaemonSet
+  ingress:
+    enabled: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-ui
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 16686
+      targetPort: 16686
+  selector:
+    app: jaeger
+  type: LoadBalancer
+  
