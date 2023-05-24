@@ -2,7 +2,7 @@
 CREATE TABLE `Hero` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `hp` INTEGER NOT NULL,
+    `hp` INTEGER NOT NULL DEFAULT 100,
     `power` INTEGER NOT NULL,
 
     UNIQUE INDEX `Hero_name_key`(`name`),
