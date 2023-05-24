@@ -109,8 +109,7 @@ export interface ValidateRequest {
     /**
      * @generated from protobuf field: string jwt = 1;
      */
-    jwt: string; // Add role here
-}
+    jwt: string; // Add role here}
 /**
  * @generated from protobuf message auth.v1alpha.ValidateResponse
  */
