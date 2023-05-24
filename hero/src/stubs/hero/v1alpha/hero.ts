@@ -49,6 +49,15 @@ export interface DeleteResponse {
   hero?: Hero;
 }
 
+export interface FightRequest {
+  id?: number;
+  id2?: number;
+}
+
+export interface FightResponse {
+  message?: string;
+}
+
 export const HERO_V1ALPHA_PACKAGE_NAME = "hero.v1alpha";
 
 export interface HeroCRUDServiceClient {
@@ -59,6 +68,8 @@ export interface HeroCRUDServiceClient {
   update(request: UpdateRequest, metadata?: Metadata): Observable<UpdateResponse>;
 
   delete(request: DeleteRequest, metadata?: Metadata): Observable<DeleteResponse>;
+
+  fight(request: FightRequest, metadata?: Metadata): Observable<FightResponse>;
 }
 
 export interface HeroCRUDServiceController {
@@ -75,11 +86,13 @@ export interface HeroCRUDServiceController {
     request: DeleteRequest,
     metadata?: Metadata,
   ): Promise<DeleteResponse> | Observable<DeleteResponse> | DeleteResponse;
+
+  fight(request: FightRequest, metadata?: Metadata): Promise<FightResponse> | Observable<FightResponse> | FightResponse;
 }
 
 export function HeroCRUDServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["get", "add", "update", "delete"];
+    const grpcMethods: string[] = ["get", "add", "update", "delete", "fight"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("HeroCRUDService", method)(constructor.prototype[method], method, descriptor);

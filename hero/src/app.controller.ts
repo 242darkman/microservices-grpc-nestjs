@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
@@ -12,6 +13,8 @@ import {
   HeroCRUDServiceController,
   UpdateRequest,
   UpdateResponse,
+  FightRequest,
+  FightResponse,
   HeroCRUDServiceControllerMethods,
 } from './stubs/hero/v1alpha/hero';
 import { GrpcMethod } from '@nestjs/microservices';
@@ -22,6 +25,7 @@ import { Observable } from 'rxjs';
 @HeroCRUDServiceControllerMethods()
 export class AppController implements HeroCRUDServiceController {
   constructor(private readonly appService: AppService) {}
+
   async get(request: GetRequest, metadata?: Metadata): Promise<GetResponse> {
     let hero: Hero;
     let heroes: Hero[] = [];
@@ -67,5 +71,12 @@ export class AppController implements HeroCRUDServiceController {
     const hero = await this.appService.create(request as any);
 
     return { hero };
+  }
+
+  @GrpcMethod(HERO_CR_UD_SERVICE_NAME)
+  async fight(request: FightRequest): Promise<FightResponse> {
+    const winner = await this.appService.fight(request as any);
+
+    return winner;
   }
 }

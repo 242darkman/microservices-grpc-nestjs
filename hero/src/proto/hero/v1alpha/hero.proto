@@ -14,6 +14,7 @@ service HeroCRUDService {
   rpc Add (AddRequest) returns (AddResponse);
   rpc Update (UpdateRequest) returns (UpdateResponse);
   rpc Delete (DeleteRequest) returns (DeleteResponse);
+  rpc Fight (FightRequest) returns (FightResponse);
 }
 
 message GetRequest {
@@ -54,5 +55,13 @@ message DeleteResponse {
   Hero hero = 1;
 }
 
+message FightRequest {
+  int32 id = 1;
+  int32 id2 = 2;
+} 
+
+message FightResponse {
+  string message = 1;
+}
 
 
